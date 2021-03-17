@@ -1,0 +1,9 @@
+<a class="button-hover" routerLink="/"> <h1>MPСommunity</h1></a>
+
+<div class="links-div">
+  <a *ngIf="(uid$ | async) === ''; else authUserTemplate">Sign In</a>
+  <ng-template #authUserTemplate>
+    <a>Profile</a>
+    <a (click)="logOut()">LogOut</a>
+  </ng-template>
+</div>
