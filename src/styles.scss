@@ -1,1 +1,80 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;1,700&display=swap');
+
+.link {
+  background-color: rgb(91, 199, 158);
+  color: white;
+}
+
+body {
+  background-color: rgb(193, 189, 186);
+  margin: 0;
+}
+
+* {
+  color: white;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.window-div {
+  background-color: rgb(40, 50, 59);
+  box-shadow: 0 0 15px rgba(40, 50, 59);
+}
+
+router-outlet + * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+$contentWidth: 250px;
+$contentHeight: 250px;
+
+button {
+  border: none;
+  width: $contentWidth;
+  font-size: 20pt;
+  cursor: pointer;
+  padding: 10px;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+  outline: 1px solid;
+  outline-color: rgba(255, 255, 255, 0.5);
+  outline-offset: 0px;
+  text-shadow: none;
+  transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+button:hover {
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.2);
+  outline-color: rgba(255, 255, 255, 0);
+  outline-offset: 15px;
+  text-shadow: 1px 1px 2px #427388;
+}
+
+button:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+input {
+  position: relative;
+  width: $contentWidth;
+  padding: 2px 2px;
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid rgb(158, 173, 176);
+  font-size: 14pt;
+  margin-bottom: 20px;
+}
+
+input:focus {
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+input.ng-touched.ng-invalid {
+  border: 2px solid rgba(255, 0, 0, 0.418);
+}
