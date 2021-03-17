@@ -123,6 +123,10 @@
               "devServerTarget": "Innowise-lab-internship-level2:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }
