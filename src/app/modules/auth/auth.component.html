@@ -1,0 +1,12 @@
+<template #toastContainer></template>
+<div class="window-div" *ngIf="(uid$ | async) === ''">
+  <div>
+    <nav>
+      <a routerLink="login" routerLinkActive="activeLink">Sign In</a>
+      <a routerLink="register" routerLinkActive="activeLink">Sign Up</a>
+    </nav>
+  </div>
+  <div class="content-div">
+    <router-outlet></router-outlet>
+  </div>
+</div>

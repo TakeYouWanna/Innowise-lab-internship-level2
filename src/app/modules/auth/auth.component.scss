@@ -1,0 +1,28 @@
+$contentWidth: 250px;
+$contentHeight: 250px;
+
+.activeLink {
+  background-color: rgb(91, 199, 158);
+  color: white;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 30px;
+  box-sizing: content-box;
+}
+
+.content-div {
+  width: $contentWidth;
+  height: $contentHeight;
+  text-align: center;
+}
+
+a {
+  padding: 10px 40px;
+  background-color: rgb(69, 92, 99);
+  color: rgb(158, 173, 176);
+}
