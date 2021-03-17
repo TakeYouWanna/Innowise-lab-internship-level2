@@ -1,0 +1,13 @@
+<form [formGroup]="registerForm" (submit)="onSubmit()">
+  <h1>Sign Up</h1>
+  <input type="email" placeholder="email *" formControlName="email" />
+  <input type="password" placeholder="password *" formControlName="password" />
+  <input
+    type="password"
+    placeholder="Confirm password *"
+    formControlName="passwordConfirm"
+  />
+  <button class="link" type="submit" [disabled]="registerForm.invalid">
+    GET STARTED
+  </button>
+</form>
