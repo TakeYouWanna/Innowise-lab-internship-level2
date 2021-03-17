@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: 'AIzaSyBQuVIrVSUH9y7mjQH2yq4OhtMMHXAh2zQ',
+    authDomain: 'innowise-lab-internship-level2.firebaseapp.com',
+    projectId: 'innowise-lab-internship-level2',
+    storageBucket: 'innowise-lab-internship-level2.appspot.com',
+    messagingSenderId: '1082115697714',
+    appId: '1:1082115697714:web:78909c9fab854216b9a02b',
+  },
 };
 
 /*
