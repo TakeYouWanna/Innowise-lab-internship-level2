@@ -1,0 +1,32 @@
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: ['airbnb-base'],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 12,
+    sourceType: 'module',
+  },
+  plugins: ['@typescript-eslint'],
+  rules: {
+    'linebreak-style': 'off',
+    'import/prefer-default-export': 'off',
+    'class-methods-use-this': 'off',
+    'import/no-unresolved': 'off',
+    'no-undef': 'off',
+    'comma-dangle': 'off',
+    'implicit-arrow-linebreak': 'off',
+    'no-useless-constructor': 'off',
+    'no-unused-vars': 'off',
+    'no-empty-function': 'off',
+    'object-curly-newline': 'off',
+    'no-confusing-arrow': 'off',
+    'arrow-body-style': 'off',
+    'operator-linebreak': 'off',
+    'function-paren-newline': 'off',
+    'no-shadow': 'off',
+    'max-classes-per-file': 'off',
+  },
+};
