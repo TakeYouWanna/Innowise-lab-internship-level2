@@ -1,27 +1,128 @@
 # InnowiseLabInternshipLevel2
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.1.
+[TASK](https://docs.google.com/document/d/1K79_NA4lMYfqQiIJGqLDek1K9z-oc2qg8n4AvrN1PXE/edit)
 
-## Development server
+# DEMO
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+[Demo version of the project](http://takeyouwanna.github.io/)
 
-## Code scaffolding
+# How to run the app
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Clone this repository
 
-## Build
+```
+$ git clone https://github.com/TakeYouWanna/Innowise-lab-internship-level2
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+2. Open the directory in VSCode
 
-## Running unit tests
+3. Open a terminal in VSCode and install the NPM module
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+$ npm install
+```
 
-## Running end-to-end tests
+4. Run the application with the command
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```
+$ ng serve --open
+```
 
-## Further help
+# FOLDERS STRUCTURE
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+└──src
+    └──app
+        ├──modules
+                ├──auth
+					├──login-page								#login component folder
+					├──register-page							#register component folder
+					├──auth-routing.module.ts					#routing module for load auth component and routing in auth module
+					├──auth.component.html						#container for register or login component (with routing)
+					├──auth.component.scss						#style for login/register container
+                    ├──auth.component.ts            			#component for this login/register container
+                    └──auth.module.ts                       	#auth module for lazy load
+
+                ├──gallery
+                    ├──gallery-routing.module.ts				#routing module for load gallery component
+                    ├──gallery.component.html   				# \
+                    ├──gallery.component.scss  					# # gallery component
+					├──gallery.component.ts                     # /
+                    └──gallery.module.ts   		               	#gallery module for lazy load
+
+                ├──my-gallery
+                    ├──gallery-routing.module.ts				#routing module for load my-gallery component
+                    ├──gallery.component.html   				# \
+                    ├──gallery.component.scss  					# # my-gallery component
+					├──gallery.component.ts                     # /
+                    └──gallery.module.ts   	        			#my-gallery module for lazy load
+
+                ├──mini-paint
+					├──drawing-properties						#component with properties form for drawing
+					├──drawing-tools							#component with tools for drawing (and save/clear)
+                    ├──mini-paint-routing.module.ts				#routing module for mini-paint
+                    ├──mini-paint.component.html   				# \
+                	├──mini-paint.component.scss  				# # mini-paint component
+					├──mini-paint.component.ts                  # /
+                	└──mini-paint.module.ts   	            	#mini-paint module for lazy load
+
+		├──store												#contains actions, reducers, effects, selectors for data processing
+				├──picture-list									#folder containing files for processing picture list data
+				├──toast-notice									#folder containing files for processing toast notice
+				├──user											#folder containing files for processing user data
+				└──index.ts										#contains all state and reducers
+
+        └──shared
+                ├──interfaces                               	#interfaces for the project
+                ├──services
+                    ├──drawing                                	#services drawing
+							├──classes							#classes for drawing
+									├──drawing-method.ts		#class for choosing a drawing method
+									├──drawing.ts				#abstraction class for drawing tools class
+									├──coordinates.ts			#click position class
+									├──star-drawing.ts			#class for star drawing
+									└── ...other classes 		#other drawing classes are extensible
+							├──interfaces 						#interfaces for drawing
+							└──drawing.service.ts				#the main drawing service that starts drawing
+                    └──firebase                            		#services for working with firestore/firebase-Auth
+
+                └──components
+						├──toast-notice							#component to dynamically insert it in the form of toast notifications
+                        └──top-bar                          	#top-bar component with navigation
+
+    ├──environments                              				#contains information about firebase server
+    ├──assets 	                                  				#contains icons for project
+    └──index.scss												#the main styles for project (changing the style of the entire project)
+
+```
+
+# FIRESTORE STRUCTURE
+
+```
+    └──Images                                       			#main collection for users
+          └──ImagesId                                			#user id
+                  ├──ImageSrc  									#link to image
+				  ├──Author 									#user email
+				  └──date		                      			#date added
+
+```
+
+# APPLICATION STACK
+
+#### used libraries
+
+## RxJS
+
+#### used for processing and working with data
+
+## NgRx
+
+#### used to organize memory
+
+## Prettier
+
+#### used for formatting code
+
+## Eslint
+
+#### used for syntactic checking
