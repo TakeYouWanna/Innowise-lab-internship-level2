@@ -125,4 +125,3 @@ $ ng serve --open
 ## Eslint
 
 #### used for syntactic checking
- 
