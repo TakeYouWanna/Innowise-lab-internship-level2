@@ -1,0 +1,14 @@
+<app-drawing-tools
+  class="window-div"
+  [(toolName)]="toolName"
+  (drawingClear)="clear()"
+  (drawingSave)="save()"
+></app-drawing-tools>
+
+<canvas #canvas></canvas>
+
+<app-drawing-properties
+  class="window-div"
+  [(figureForm)]="figureProperties"
+  [(textForm)]="textProperties"
+></app-drawing-properties>

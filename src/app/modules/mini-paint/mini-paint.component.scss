@@ -1,0 +1,31 @@
+$canvasHeight: 550px;
+$canvasWidth: 700px;
+$padding: 20px;
+
+canvas {
+  width: $canvasWidth;
+  height: $canvasHeight;
+  box-sizing: border-box;
+}
+
+app-drawing-tools,
+app-drawing-properties {
+  display: flex;
+  flex-direction: column;
+  padding: $padding;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  height: $canvasHeight;
+}
+
+@media only screen and (max-width: $canvasWidth * 1.5) {
+  app-drawing-tools,
+  app-drawing-properties {
+    flex-direction: row;
+    align-items: flex-start;
+    width: $canvasWidth;
+    height: auto;
+    font-size: 20pt;
+  }
+}
