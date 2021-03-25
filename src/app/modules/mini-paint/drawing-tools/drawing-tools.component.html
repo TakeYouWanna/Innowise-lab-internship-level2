@@ -1,0 +1,20 @@
+<button
+  *ngFor="let tool of toolsList | keyvalue"
+  (click)="toolNameChange.emit(tool.key)"
+  [disabled]="toolName == tool.key"
+  class="coloredBackground"
+>
+  <img [src]="tool.value" />
+</button>
+
+<button (click)="drawingClear.emit()" class="coloredBackground">
+  <img src="../../../../assets/icons/clear.png" />
+</button>
+<button
+  (click)="save()"
+  class="coloredBackground"
+  *ngIf="uid$ | async"
+  [disabled]="saving | async"
+>
+  <img src="../../../../assets/icons/save.png" />
+</button>
