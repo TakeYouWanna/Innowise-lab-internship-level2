@@ -10,26 +10,25 @@ import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './shared/components/top-bar/top-bar.component';
-import { userReducer } from './store/user/user.reducer';
-import { UserEffect } from './store/user/user.effect';
-import { toastNoticeReducer } from './store/toast-notice/toast-notice.reducer';
-import { ToastNoticeEffect } from './store/toast-notice/toast-notice.effect';
-import { ToastNoticeComponent } from './shared/components/toast-message/toast-notice.component';
+import { UserEffect } from './store/user/effect';
+import { ToastNoticeEffect } from './store/toast-notice/effect';
+import { PictureListEffect } from './store/picture-list/effect';
+import { reducers } from './store';
 
 @NgModule({
-  declarations: [AppComponent, TopBarComponent, ToastNoticeComponent],
+  declarations: [AppComponent, TopBarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    StoreModule.forRoot({ user: userReducer, toastNotice: toastNoticeReducer }),
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([UserEffect, ToastNoticeEffect]),
+    EffectsModule.forRoot([UserEffect, ToastNoticeEffect, PictureListEffect]),
   ],
   providers: [],
   bootstrap: [AppComponent],
