@@ -1,0 +1,81 @@
+form {
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  color: black;
+
+  input {
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid white;
+  }
+
+  input[type='number'] {
+    width: 50px;
+    font-size: 12pt;
+    width: max-content;
+    box-sizing: border-box;
+  }
+
+  input[type='color'] {
+    width: 30px;
+    height: 30px;
+    border: none;
+    outline: none;
+    font-size: 30pt;
+  }
+
+  input[type='text'] {
+    height: 30px;
+  }
+
+  select {
+    box-sizing: border-box;
+    font-size: 13pt;
+    option {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid white;
+  }
+
+  label {
+    margin-top: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.font-style {
+  width: 100%;
+
+  input[type='checkbox'] {
+    display: none;
+  }
+
+  label {
+    border: 1px solid rgb(255, 255, 255);
+    padding: 4px 4px;
+    width: max-content;
+    box-sizing: content-box;
+    cursor: pointer;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  input[type='checkbox']:checked + label {
+    background-color: rgb(255, 255, 255);
+    color: black;
+  }
+}
+
+.weight-font {
+  font-weight: bold;
+}
+
+.cursive-font {
+  font-style: italic;
+}
