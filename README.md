@@ -93,7 +93,6 @@ $ ng serve --open
     ├──environments                                     #contains information about firebase server
     ├──assets 	                                  		#contains icons for project
     └──index.scss										#the main styles for project (changing the style of the entire project)
-
 ```
 
 # FIRESTORE STRUCTURE
