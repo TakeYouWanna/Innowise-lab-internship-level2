@@ -1,5 +1,10 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 
 @Component({
   selector: 'app-toast-notice',
@@ -16,9 +21,25 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ToastNoticeComponent {
+export class ToastNoticeComponent implements OnInit {
   @Input()
-  public message!: string;
+  public message: string;
 
-  constructor() {}
+  @Input()
+  public messageType: string;
+
+  public background: string;
+
+  public ngOnInit(): void {
+    switch (this.messageType) {
+      case 'error':
+        this.background = 'red';
+        break;
+      case 'successfully':
+        this.background = 'green';
+        break;
+      default:
+        this.background = 'red';
+    }
+  }
 }
