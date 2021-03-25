@@ -1,9 +1,13 @@
-<a class="button-hover" routerLink="/"> <h1>MPСommunity</h1></a>
-
-<div class="links-div">
-  <a *ngIf="(uid$ | async) === ''; else authUserTemplate">Sign In</a>
-  <ng-template #authUserTemplate>
-    <a>Profile</a>
-    <a (click)="logOut()">LogOut</a>
-  </ng-template>
-</div>
+<a routerLink="/constructor" routerLinkActive="activeLink">Constructor</a>
+<a routerLink="/gallery" routerLinkActive="activeLink">Gallery</a>
+<a
+  *ngIf="(uid$ | async) === ''; else authUserTemplate"
+  routerLink="/auth"
+  routerLinkActive="activeLink"
+>
+  Sign In
+</a>
+<ng-template #authUserTemplate>
+  <a routerLink="/my-gallery" routerLinkActive="activeLink">My pictures</a>
+  <a (click)="logOut()" routerLinkActive="activeLink">LogOut</a>
+</ng-template>
