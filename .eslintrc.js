@@ -28,5 +28,9 @@ module.exports = {
     'function-paren-newline': 'off',
     'no-shadow': 'off',
     'max-classes-per-file': 'off',
+    'no-param-reassign': 'off',
+    'no-plusplus': 'off',
+    'import/extensions': 'off',
+    'import/no-extraneous-dependencies': 'off',
   },
 };
