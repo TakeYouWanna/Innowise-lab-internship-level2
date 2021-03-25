@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { ApiError } from 'src/app/shared/interfaces/api-error.interface';
 import { User } from 'src/app/shared/interfaces/user.interface';
-import { userActionsType } from './constants/user-actions.constant';
+import { userActionsType } from './constant';
 
 export const loadUser = createAction(
   userActionsType.loadUser,

@@ -1,8 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
-import { User } from 'src/app/shared/interfaces/user.interface';
-import { loadUserSuccess, logOutUser } from './user.actions';
+import { loadUserSuccess, logOutUser } from './actions';
 
-const userInitialState: User = {
+export interface UserState {
+  uid: string;
+  email: string;
+}
+
+const userInitialState: UserState = {
   uid: '',
   email: '',
 };

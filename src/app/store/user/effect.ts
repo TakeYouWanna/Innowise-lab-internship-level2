@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { FirebaseAuthService } from 'src/app/shared/services/firebase/firebase-auth.service';
+import { setMessage } from '../toast-notice/actions';
 import {
   createUser,
   initializeUser,
@@ -10,11 +11,11 @@ import {
   loadUserFailure,
   loadUserSuccess,
   logOutUser,
-} from './user.actions';
+} from './actions';
 
 @Injectable()
 export class UserEffect {
-  loadUser$ = createEffect(() =>
+  private loadUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadUser),
       switchMap((action) =>
@@ -26,7 +27,7 @@ export class UserEffect {
     )
   );
 
-  createUser$ = createEffect(() =>
+  private createUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(createUser),
       switchMap((action) =>
@@ -38,7 +39,7 @@ export class UserEffect {
     )
   );
 
-  initializeUser$ = createEffect(() =>
+  private initializeUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(initializeUser),
       switchMap(() =>
@@ -49,29 +50,28 @@ export class UserEffect {
     )
   );
 
-  // this effect will be used after adding other modules!
-
-  // loadUserSuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(loadUserSuccess),
-  //       tap(() => this.router.navigate(['']))
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  logOutUser$ = createEffect(
+  private logOutUser$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(logOutUser),
-        tap(() => this.firebaseAuthService.logOut())
+        map(() => this.firebaseAuthService.logOut())
       ),
     { dispatch: false }
   );
 
+  private loadUserFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadUserFailure),
+      map((action) => {
+        const { message } = action.error;
+        const messageType = 'error';
+        return setMessage({ message, messageType });
+      })
+    )
+  );
+
   constructor(
     private actions$: Actions,
-    private firebaseAuthService: FirebaseAuthService,
-    private router: Router
+    private firebaseAuthService: FirebaseAuthService
   ) {}
 }
