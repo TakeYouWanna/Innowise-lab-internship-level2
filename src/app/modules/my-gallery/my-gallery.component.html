@@ -1,0 +1,12 @@
+<div
+  class="window-div picture"
+  *ngFor="let picture of pictureList | async | keyvalue; trackBy: trackByObject"
+>
+  <div>
+    <p>
+      {{ picture.value.author }}
+    </p>
+    <button (click)="removePicture(picture.key)">&#10006;</button>
+  </div>
+  <img [src]="picture.value.imageSrc" />
+</div>

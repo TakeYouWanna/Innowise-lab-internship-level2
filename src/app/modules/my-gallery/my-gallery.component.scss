@@ -1,0 +1,32 @@
+$imageSize: 300px;
+
+.picture {
+  padding: 20px;
+  margin: 20px;
+  font-size: 14pt;
+  max-width: $imageSize;
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    p {
+      overflow: hidden;
+    }
+    button {
+      background: none;
+      font-size: 20pt;
+      padding: 0px;
+      color: red;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      margin-left: 15px;
+    }
+  }
+  img {
+    width: $imageSize;
+    height: $imageSize;
+    background-color: white;
+  }
+}
