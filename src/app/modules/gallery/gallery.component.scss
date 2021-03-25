@@ -1,0 +1,50 @@
+$searchWidth: 350px;
+$searchHeight: 40px;
+$imageSize: 300px;
+
+.picture {
+  padding: 20px;
+  margin: 20px;
+  font-size: 14pt;
+  max-width: $imageSize;
+  p {
+    overflow: hidden;
+  }
+  img {
+    width: $imageSize;
+    height: $imageSize;
+    background-color: white;
+  }
+}
+
+.search-line {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  div {
+    border: 2px solid white;
+    padding: 0px;
+    input,
+    button {
+      border: none;
+      background-color: rgba(0, 0, 0, 0);
+      font-size: 15pt;
+    }
+    input {
+      width: $searchWidth;
+      height: $searchHeight;
+      padding-left: 10px;
+    }
+    input:focus,
+    button:focus {
+      outline: none;
+    }
+    button {
+      height: $searchHeight;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  }
+}

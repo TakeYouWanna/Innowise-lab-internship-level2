@@ -1,0 +1,17 @@
+<div class="search-line">
+  <div>
+    <input type="text" placeholder="Author name ..." [(ngModel)]="author" />
+    <button (click)="loadPictures()">Search</button>
+  </div>
+</div>
+
+<div
+  class="window-div picture"
+  *ngFor="
+    let picture of pictureList$ | async | keyvalue;
+    trackBy: trackByObject
+  "
+>
+  <p>{{ picture.value.author }}</p>
+  <img [src]="picture.value.imageSrc" />
+</div>
