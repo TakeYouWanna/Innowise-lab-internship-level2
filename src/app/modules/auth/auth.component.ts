@@ -1,16 +1,8 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ComponentFactoryResolver,
-  ViewChild,
-  ViewContainerRef,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { ToastNoticeComponent } from 'src/app/shared/components/toast-message/toast-notice.component';
-import { selectToastNoticeMessage } from 'src/app/store/toast-notice/toast-notice.selectors';
-import { selectUserUid } from 'src/app/store/user/user.selectors';
+import { Observable } from 'rxjs';
+import { selectUserUid } from 'src/app/store/user/selectors';
 
 @Component({
   selector: 'app-auth',
@@ -18,33 +10,16 @@ import { selectUserUid } from 'src/app/store/user/user.selectors';
   styleUrls: ['./auth.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthComponent implements AfterViewInit {
-  @ViewChild('toastContainer', { read: ViewContainerRef })
-  public container!: ViewContainerRef;
+export class AuthComponent implements OnInit {
+  public uid$: Observable<string> = this.store$.pipe(select(selectUserUid));
 
-  public message$ = this.store$.pipe(select(selectToastNoticeMessage));
+  constructor(private store$: Store, private router: Router) {}
 
-  public uid$ = this.store$.pipe(select(selectUserUid));
-
-  constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private store$: Store,
-    private changeDetectorRef: ChangeDetectorRef
-  ) {}
-
-  public ngAfterViewInit(): void {
-    this.message$.subscribe((message) => this.createComponent(message));
-  }
-
-  public createComponent(message: string): void {
-    if (message === '') {
-      this.container.clear();
-    } else {
-      const factory = this.componentFactoryResolver.resolveComponentFactory(
-        ToastNoticeComponent
-      );
-      this.container.createComponent(factory).instance.message = message;
-    }
-    this.changeDetectorRef.markForCheck();
+  public ngOnInit(): void {
+    this.uid$.subscribe((uid) => {
+      if (uid) {
+        this.router.navigate(['']);
+      }
+    });
   }
 }

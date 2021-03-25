@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { createUser } from 'src/app/store/user/user.actions';
+import { createUser } from 'src/app/store/user/actions';
 import { matchValues } from './validators/match-values.validator';
 
 @Component({
@@ -16,7 +16,7 @@ import { matchValues } from './validators/match-values.validator';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterPageComponent implements OnInit {
-  public registerForm!: FormGroup;
+  public registerForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private store$: Store) {}
 
