@@ -34,28 +34,28 @@ $ ng serve --open
 └──src
     └──app
         ├──modules
-                ├──auth
-					├──login-page						#login component folder
-				    ├──register-page					#register component folder
-				    ├──auth-routing.module.ts			#routing module for load auth component and routing in auth module
-					├──auth.component.html				#container for register or login component (with routing)
-					├──auth.component.scss				#style for login/register container
-                    ├──auth.component.ts           	    #component for this login/register container
-                    └──auth.module.ts                  	#auth module for lazy load
+             ├──auth
+                  ├──login-page                 #login component folder
+                  ├──register-page              #register component folder
+                  ├──auth-routing.module.ts     #routing module for load auth component and routing in auth module
+                  ├──auth.component.html        #container for register or login component (with routing)
+                  ├──auth.component.scss        #style for login/register container
+                  ├──auth.component.ts          #component for this login/register container
+                  └──auth.module.ts             #auth module for lazy load
+                  
+             ├──gallery
+                  ├──gallery-routing.module.ts	#routing module for load gallery component
+                  ├──gallery.component.html   	# \
+                  ├──gallery.component.scss     # # gallery component
+                  ├──gallery.component.ts       # /
+                  └──gallery.module.ts          #gallery module for lazy load
 
-                ├──gallery
-                    ├──gallery-routing.module.ts		#routing module for load gallery component
-                    ├──gallery.component.html   		# \
-                    ├──gallery.component.scss  			# # gallery component
-				    ├──gallery.component.ts             # /
-                    └──gallery.module.ts   		        #gallery module for lazy load
-
-                ├──my-gallery
-                    ├──gallery-routing.module.ts		#routing module for load my-gallery component
-                    ├──gallery.component.html   		# \
-                    ├──gallery.component.scss  			# # my-gallery component
-				    ├──gallery.component.ts             # /
-                    └──gallery.module.ts   	        	#my-gallery module for lazy load
+             ├──my-gallery
+                  ├──gallery-routing.module.ts  #routing module for load my-gallery component
+                  ├──gallery.component.html     # \
+                  ├──gallery.component.scss     # # my-gallery component
+                  ├──gallery.component.ts       # /
+                  └──gallery.module.ts          #my-gallery module for lazy load
 
                ├──mini-paint
 					├──drawing-properties				#component with properties form for drawing
