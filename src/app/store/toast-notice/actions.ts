@@ -1,10 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { ApiError } from 'src/app/shared/interfaces/api-error.interface';
-import { toastNoticeActionsType } from './constants/toast-notice.constant';
+import { toastNoticeActionsType } from './constant';
 
 export const setMessage = createAction(
   toastNoticeActionsType.setMessage,
-  props<{ error: ApiError }>()
+  props<{ message: string; messageType: string }>()
 );
 
 export const removeMessage = createAction(toastNoticeActionsType.removeMessage);
