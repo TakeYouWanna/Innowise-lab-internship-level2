@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Criterion } from 'src/app/shared/interfaces/criteria.interface';
 import { FigureProperties } from 'src/app/shared/interfaces/figure-properties.interface';
 import { TextProperties } from 'src/app/shared/interfaces/text-properties.interface';
 import { DrawingService } from 'src/app/shared/services/drawing/drawing.service';

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Criterion } from 'src/app/shared/interfaces/criteria.interface';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { FirestoreService } from 'src/app/shared/services/firebase/firestore.service';
 import { loadUser } from 'src/app/store/user/actions';
