@@ -1,6 +1,6 @@
 $canvasHeight: 550px;
 $canvasWidth: 700px;
-$padding: 20px;
+$padding: 15px;
 
 canvas {
   width: $canvasWidth;
@@ -13,8 +13,8 @@ app-drawing-properties {
   display: flex;
   flex-direction: column;
   padding: $padding;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-around;
+  align-items: flex-start;
   box-sizing: border-box;
   height: $canvasHeight;
 }
@@ -23,9 +23,25 @@ app-drawing-properties {
   app-drawing-tools,
   app-drawing-properties {
     flex-direction: row;
-    align-items: flex-start;
     width: $canvasWidth;
     height: auto;
     font-size: 20pt;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  canvas {
+    width: 320px;
+    height: 320px;
+  }
+
+  app-drawing-tools,
+  app-drawing-properties {
+    padding: 10px;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 320px;
+    height: auto;
+    font-size: 10pt;
   }
 }

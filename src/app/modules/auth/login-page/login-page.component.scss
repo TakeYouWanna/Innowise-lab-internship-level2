@@ -1,5 +1,4 @@
 $contentWidth: 250px;
-$contentHeight: 250px;
 
 button {
   border: none;
@@ -45,4 +44,18 @@ input:focus {
 
 input.ng-touched.ng-invalid {
   border: 2px solid rgba(255, 0, 0, 0.418);
+}
+
+h1 {
+  font-size: 18pt;
+}
+
+@media only screen and (max-width: 768px) {
+  input {
+    width: 180px;
+    font-size: 9pt;
+  }
+  button {
+    font-size: 15pt;
+  }
 }

@@ -7,9 +7,11 @@ import {
 } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Criterion } from 'src/app/shared/interfaces/criteria.interface';
 import { FigureProperties } from 'src/app/shared/interfaces/figure-properties.interface';
 import { TextProperties } from 'src/app/shared/interfaces/text-properties.interface';
 import { DrawingService } from 'src/app/shared/services/drawing/drawing.service';
+import { FirestoreService } from 'src/app/shared/services/firebase/firestore.service';
 import { State } from 'src/app/store';
 import { addPicture } from 'src/app/store/picture-list/actions';
 import { selectUserUid } from 'src/app/store/user/selectors';
@@ -37,7 +39,8 @@ export class MiniPaintComponent implements AfterViewInit {
 
   constructor(
     private drawingService: DrawingService,
-    private store$: Store<State>
+    private store$: Store<State>,
+    private firestore: FirestoreService
   ) {}
 
   public ngAfterViewInit(): void {
@@ -81,7 +84,7 @@ export class MiniPaintComponent implements AfterViewInit {
   }
 
   public save(): void {
-    const imageSrc = this.canvas.nativeElement.toDataURL('image/png');
-    this.store$.dispatch(addPicture({ imageSrc }));
+    const pictureSrc = this.canvas.nativeElement.toDataURL('image/png');
+    this.store$.dispatch(addPicture({ pictureSrc }));
   }
 }

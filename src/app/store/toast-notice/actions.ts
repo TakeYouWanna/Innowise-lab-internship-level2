@@ -1,9 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { toastNoticeActionsType } from './constant';
+import { ToastNoticeActionsType } from './constant';
 
 export const setMessage = createAction(
-  toastNoticeActionsType.setMessage,
+  ToastNoticeActionsType.setMessage,
   props<{ message: string; messageType: string }>()
 );
 
-export const removeMessage = createAction(toastNoticeActionsType.removeMessage);
+export const removeMessage = createAction(ToastNoticeActionsType.removeMessage);

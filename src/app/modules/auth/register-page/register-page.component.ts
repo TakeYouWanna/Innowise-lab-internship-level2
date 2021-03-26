@@ -23,6 +23,7 @@ export class RegisterPageComponent implements OnInit {
   public ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
+      name: [null, [Validators.required]],
       password: [null, [Validators.required, Validators.minLength(6)]],
       passwordConfirm: [
         null,
@@ -32,8 +33,8 @@ export class RegisterPageComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    const { email, password } = this.registerForm.value;
-    this.store$.dispatch(createUser({ email, password }));
+    const { email, password, name } = this.registerForm.value;
+    this.store$.dispatch(createUser({ email, password, name }));
     this.registerForm.reset();
   }
 }

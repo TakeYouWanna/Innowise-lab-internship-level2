@@ -6,9 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { Criterion } from 'src/app/shared/interfaces/criteria.interface';
-import { PictureList } from 'src/app/shared/interfaces/picture-list.interface';
 import { State } from 'src/app/store';
 import {
   clearAllPicture,

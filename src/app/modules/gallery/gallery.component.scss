@@ -1,6 +1,6 @@
 $searchWidth: 350px;
 $searchHeight: 40px;
-$imageSize: 300px;
+$imageSize: 25vw;
 
 .picture {
   padding: 20px;
@@ -8,6 +8,7 @@ $imageSize: 300px;
   font-size: 14pt;
   max-width: $imageSize;
   p {
+    margin: 0px 0px 20px 0px;
     overflow: hidden;
   }
   img {
@@ -45,6 +46,33 @@ $imageSize: 300px;
       height: $searchHeight;
       margin-right: 10px;
       cursor: pointer;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .picture {
+    padding: 8px;
+    margin: 10px;
+    font-size: 15pt;
+    p {
+      margin: 0px 0px 10px 0px;
+    }
+  }
+
+  .search-line {
+    div {
+      input,
+      button {
+        font-size: 15pt;
+      }
+      input {
+        width: 200px;
+        height: 30px;
+      }
+      button {
+        height: 30px;
+      }
     }
   }
 }

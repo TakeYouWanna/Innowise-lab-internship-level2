@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { ToastMessageType } from '../../constants/message-type.constant';
 
 @Component({
   selector: 'app-toast-notice',
@@ -32,10 +33,10 @@ export class ToastNoticeComponent implements OnInit {
 
   public ngOnInit(): void {
     switch (this.messageType) {
-      case 'error':
+      case ToastMessageType.error:
         this.background = 'red';
         break;
-      case 'successfully':
+      case ToastMessageType.successfully:
         this.background = 'green';
         break;
       default:

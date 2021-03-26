@@ -1,9 +1,17 @@
 app-top-bar {
-  padding: 8px 20px;
+  padding: 8px 10px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 50px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  app-top-bar {
+    margin-bottom: 20px;
+  }
 }

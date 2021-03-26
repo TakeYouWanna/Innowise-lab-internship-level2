@@ -1,5 +1,5 @@
 <button
-  *ngFor="let tool of toolsList | keyvalue"
+  *ngFor="let tool of toolsList | keyvalue; trackBy: trackByObject"
   (click)="toolNameChange.emit(tool.key)"
   [disabled]="toolName == tool.key"
   class="coloredBackground"

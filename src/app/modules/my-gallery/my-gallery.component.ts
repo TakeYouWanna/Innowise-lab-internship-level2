@@ -18,7 +18,7 @@ import {
 } from 'src/app/store/picture-list/actions';
 import { PictureListActionsType } from 'src/app/store/picture-list/constant';
 import { selectPictureList } from 'src/app/store/picture-list/selectors';
-import { selectUserEmail } from 'src/app/store/user/selectors';
+import { selectUserUid } from 'src/app/store/user/selectors';
 
 @Component({
   selector: 'app-my-gallery',
@@ -31,13 +31,13 @@ export class MyGalleryComponent implements OnInit, OnDestroy {
     select(selectPictureList)
   );
 
-  public email$ = this.store$.pipe(select(selectUserEmail));
+  public uid$ = this.store$.pipe(select(selectUserUid));
 
-  public emailSubscription$: Subscription;
+  public uidSubscription$: Subscription;
 
   public criterion: Criterion = {
     limit: 10,
-    type: 'author',
+    type: 'uid',
     value: '',
   };
 
@@ -56,9 +56,9 @@ export class MyGalleryComponent implements OnInit, OnDestroy {
   constructor(private store$: Store<State>, private actions$: Actions) {}
 
   public ngOnInit(): void {
-    this.emailSubscription$ = this.email$.subscribe((email) => {
-      if (email) {
-        this.criterion.value = email;
+    this.uidSubscription$ = this.uid$.subscribe((uid) => {
+      if (uid) {
+        this.criterion.value = uid;
         this.loadPictures();
       }
     });
@@ -77,8 +77,8 @@ export class MyGalleryComponent implements OnInit, OnDestroy {
     }
   }
 
-  public removePicture(id: string): void {
-    this.store$.dispatch(removePicture({ id }));
+  public removePicture(pictureId: string): void {
+    this.store$.dispatch(removePicture({ pictureId }));
   }
 
   public trackByObject(index: number, item: object): number {
@@ -86,7 +86,7 @@ export class MyGalleryComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.emailSubscription$.unsubscribe();
+    this.uidSubscription$.unsubscribe();
     this.store$.dispatch(clearAllPicture());
   }
 }

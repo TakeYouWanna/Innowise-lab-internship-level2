@@ -6,61 +6,122 @@ import {
   QuerySnapshot,
 } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Criterion } from '../../interfaces/criteria.interface';
 import { PictureList } from '../../interfaces/picture-list.interface';
-import { Picture } from '../../interfaces/picture.interface';
+import { PictureData } from './interfaces/picture-data.interface';
+import { UserData } from './interfaces/user-data.interface';
 
 @Injectable({ providedIn: 'root' })
 export class FirestoreService {
-  private collectionRef: CollectionReference<unknown>;
+  private collectionPicturesRef: CollectionReference<unknown>;
+
+  private collectionUsersRef: CollectionReference<unknown>;
 
   constructor(private angularFirestore: AngularFirestore) {
-    this.collectionRef = this.angularFirestore.collection('Images').ref;
+    this.collectionPicturesRef = this.angularFirestore.collection(
+      'Pictures'
+    ).ref;
+    this.collectionUsersRef = this.angularFirestore.collection('Users').ref;
   }
 
   public addNewPicture(
-    imageSrc: string,
-    author: string
+    pictureSrc: string,
+    userId: string
   ): Observable<DocumentReference<unknown>> {
     const data = {
-      imageSrc,
-      author,
-      date: new Date(),
+      pictureSrc,
+      userId,
+      dateAdded: new Date(),
     };
-    return from(this.collectionRef.add(data));
+    return from(this.collectionPicturesRef.add(data));
   }
 
-  public removePicture(id: string): Observable<void> {
-    return from(this.collectionRef.doc(id).delete());
+  public addNewUser(
+    uid: string,
+    name: string
+  ): Observable<DocumentReference<unknown>> {
+    const newUser = {
+      uid,
+      name,
+    };
+    return from(this.collectionUsersRef.add(newUser));
+  }
+
+  public removePicture(pictureId: string): Observable<void> {
+    return from(this.collectionPicturesRef.doc(pictureId).delete());
   }
 
   public getPictures(criterion: Criterion): Observable<PictureList> {
-    return from(this.returnRequestByCriterion(criterion)).pipe(
-      map((response) =>
-        response.docs.reduce((acc, val) => {
-          const { imageSrc, author } = val.data() as Picture;
-          acc[val.id] = { imageSrc, author };
-          return acc;
-        }, {} as PictureList)
-      )
+    return this.returnRequestByCriterion(criterion).pipe(
+      switchMap((picturesData) => {
+        const usersId = [
+          ...new Set(
+            picturesData.docs.map(
+              (pictureData) => (pictureData.data() as PictureData).userId
+            )
+          ),
+        ];
+        return from(
+          this.collectionUsersRef.where('uid', 'in', usersId).get()
+        ).pipe(
+          map((usersData) => {
+            return picturesData.docs.reduce((pictureList, picture) => {
+              const { pictureSrc, userId } = picture.data() as PictureData;
+              const { name } = usersData.docs
+                .find((value) => {
+                  return (value.data() as UserData).uid === userId;
+                })
+                .data() as UserData;
+              pictureList[picture.id] = { pictureSrc, name };
+              return pictureList;
+            }, {} as PictureList);
+          })
+        );
+      })
+    );
+  }
+
+  private getUidByUsername(name: string): Observable<string> {
+    return from(this.collectionUsersRef.where('name', '==', name).get()).pipe(
+      map((userData) => {
+        if (userData.size > 0) {
+          return (userData.docs.pop().data() as UserData).uid;
+        }
+        return '';
+      })
     );
   }
 
   private returnRequestByCriterion(
     criterion: Criterion
-  ): Promise<QuerySnapshot<unknown>> {
+  ): Observable<QuerySnapshot<unknown>> {
     switch (criterion.type) {
+      case 'uid':
+        return from(
+          this.collectionPicturesRef
+            .where('userId', '==', criterion.value)
+            .limit(criterion.limit)
+            .get()
+        );
       case 'author':
-        return this.collectionRef
-          .where('author', '==', criterion.value)
-          .limit(criterion.limit)
-          .get();
+        return from(
+          this.getUidByUsername(criterion.value).pipe(
+            switchMap((uid) =>
+              this.collectionPicturesRef
+                .where('userId', '==', uid)
+                .limit(criterion.limit)
+                .get()
+            )
+          )
+        );
       default:
-        return this.collectionRef
-          .orderBy('date', 'desc')
-          .limit(criterion.limit)
-          .get();
+        return from(
+          this.collectionPicturesRef
+            .orderBy('dateAdded', 'desc')
+            .limit(criterion.limit)
+            .get()
+        );
     }
   }
 }

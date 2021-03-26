@@ -8,7 +8,7 @@ export class ToastNoticeEffect {
   private setMessage$ = createEffect(() =>
     this.action$.pipe(
       ofType(setMessage),
-      delay(4000),
+      delay(5000),
       map(() => removeMessage())
     )
   );

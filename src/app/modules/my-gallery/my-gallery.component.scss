@@ -1,4 +1,4 @@
-$imageSize: 300px;
+$imageSize: 25vw;
 
 .picture {
   padding: 20px;
@@ -28,5 +28,23 @@ $imageSize: 300px;
     width: $imageSize;
     height: $imageSize;
     background-color: white;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .picture {
+    padding: 8px;
+    margin: 10px;
+    font-size: 15pt;
+    p {
+      margin: 0px;
+    }
+
+    div {
+      margin: 0px 0px 10px 0px;
+      button {
+        font-size: 10pt;
+      }
+    }
   }
 }

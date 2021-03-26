@@ -21,7 +21,7 @@ export const loadPicturesFailure = createAction(
 
 export const addPicture = createAction(
   PictureListActionsType.addPicture,
-  props<{ imageSrc: string }>()
+  props<{ pictureSrc: string }>()
 );
 
 export const addPictureSuccess = createAction(
@@ -36,7 +36,7 @@ export const addPictureFailure = createAction(
 
 export const removePicture = createAction(
   PictureListActionsType.removePicture,
-  props<{ id: string }>()
+  props<{ pictureId: string }>()
 );
 
 export const removePictureSuccess = createAction(

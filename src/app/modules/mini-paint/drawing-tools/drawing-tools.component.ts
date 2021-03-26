@@ -60,6 +60,10 @@ export class DrawingToolsComponent implements OnInit, OnDestroy {
       });
   }
 
+  public trackByObject(index: number, item: object): number {
+    return index;
+  }
+
   public ngOnDestroy(): void {
     this.saving.complete();
   }

@@ -5,6 +5,16 @@
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  max-width: 250px;
+  max-width: 350px;
+  overflow: hidden;
   z-index: 20;
+  p {
+    font-size: 12pt;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  p {
+    font-size: 8pt;
+  }
 }

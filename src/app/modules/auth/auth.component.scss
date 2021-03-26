@@ -1,5 +1,4 @@
 $contentWidth: 250px;
-$contentHeight: 250px;
 
 .activeLink {
   background-color: rgb(91, 199, 158);
@@ -12,12 +11,16 @@ div {
   align-items: center;
   justify-content: flex-start;
   padding: 30px;
-  box-sizing: content-box;
+  box-sizing: border-box;
+}
+
+.navigation-div {
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .content-div {
-  width: $contentWidth;
-  height: $contentHeight;
+  max-width: $contentWidth;
   text-align: center;
 }
 
@@ -25,4 +28,11 @@ a {
   padding: 10px 40px;
   background-color: rgb(69, 92, 99);
   color: rgb(158, 173, 176);
+  font-size: 15pt;
+}
+
+@media only screen and (max-width: 768px) {
+  a {
+    font-size: 8pt;
+  }
 }

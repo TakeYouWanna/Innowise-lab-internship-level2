@@ -4,9 +4,9 @@
 >
   <div>
     <p>
-      {{ picture.value.author }}
+      {{ picture.value.name }}
     </p>
     <button (click)="removePicture(picture.key)">&#10006;</button>
   </div>
-  <img [src]="picture.value.imageSrc" />
+  <img [src]="picture.value.pictureSrc" />
 </div>

@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { FirebaseErrorsService } from 'src/app/shared/services/firebase/firebase-errors.service';
 import { FirestoreService } from 'src/app/shared/services/firebase/firestore.service';
 import { State } from '..';
+import { ToastMessageType } from '../../shared/constants/message-type.constant';
 import { setMessage } from '../toast-notice/actions';
-import { selectUserEmail } from '../user/selectors';
+import { selectUserUid } from '../user/selectors';
 import {
   addPicture,
   addPictureFailure,
@@ -23,9 +25,9 @@ export class PictureListEffect {
   private addPicture$ = createEffect(() =>
     this.action$.pipe(
       ofType(addPicture),
-      withLatestFrom(this.store$.pipe(select(selectUserEmail))),
-      switchMap(([action, email]) =>
-        this.firestore.addNewPicture(action.imageSrc, email).pipe(
+      withLatestFrom(this.store$.pipe(select(selectUserUid))),
+      switchMap(([action, uid]) =>
+        this.firestore.addNewPicture(action.pictureSrc, uid).pipe(
           map(() => {
             const message = 'Picture added successfully';
             return addPictureSuccess({ message });
@@ -52,7 +54,7 @@ export class PictureListEffect {
     this.action$.pipe(
       ofType(removePicture),
       switchMap((action) =>
-        this.firestore.removePicture(action.id).pipe(
+        this.firestore.removePicture(action.pictureId).pipe(
           map(() => {
             const message = 'Picture removed successfully';
             return removePictureSuccess({ message });
@@ -68,7 +70,7 @@ export class PictureListEffect {
       ofType(addPictureSuccess),
       map((action) => {
         const { message } = action;
-        const messageType = 'successfully';
+        const messageType = ToastMessageType.successfully;
         return setMessage({ message, messageType });
       })
     )
@@ -78,8 +80,10 @@ export class PictureListEffect {
     this.action$.pipe(
       ofType(addPictureFailure),
       map((action) => {
-        const { message } = action.error;
-        const messageType = 'error';
+        const message = this.firebaseErrorService.getMessageFromError(
+          action.error
+        );
+        const messageType = ToastMessageType.error;
         return setMessage({ message, messageType });
       })
     )
@@ -90,7 +94,7 @@ export class PictureListEffect {
       ofType(removePictureSuccess),
       map((action) => {
         const { message } = action;
-        const messageType = 'successfully';
+        const messageType = ToastMessageType.successfully;
         return setMessage({ message, messageType });
       })
     )
@@ -100,8 +104,10 @@ export class PictureListEffect {
     this.action$.pipe(
       ofType(removePictureFailure),
       map((action) => {
-        const { message } = action.error;
-        const messageType = 'error';
+        const message = this.firebaseErrorService.getMessageFromError(
+          action.error
+        );
+        const messageType = ToastMessageType.error;
         return setMessage({ message, messageType });
       })
     )
@@ -111,8 +117,10 @@ export class PictureListEffect {
     this.action$.pipe(
       ofType(loadPicturesFailure),
       map((action) => {
-        const { message } = action.error;
-        const messageType = 'error';
+        const message = this.firebaseErrorService.getMessageFromError(
+          action.error
+        );
+        const messageType = ToastMessageType.error;
         return setMessage({ message, messageType });
       })
     )
@@ -121,6 +129,7 @@ export class PictureListEffect {
   constructor(
     private action$: Actions,
     private firestore: FirestoreService,
-    private store$: Store<State>
+    private store$: Store<State>,
+    private firebaseErrorService: FirebaseErrorsService
   ) {}
 }

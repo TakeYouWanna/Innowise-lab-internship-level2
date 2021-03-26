@@ -1,4 +1,4 @@
-export const enum toastMessageType {
+export const enum ToastMessageType {
   error = 'error',
   successfully = 'successfully',
 }
