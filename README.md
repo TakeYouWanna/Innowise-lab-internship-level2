@@ -42,7 +42,7 @@ $ ng serve --open
                   ├──auth.component.scss        #style for login/register container
                   ├──auth.component.ts          #component for this login/register container
                   └──auth.module.ts             #auth module for lazy load
-                  
+
              ├──gallery
                   ├──gallery-routing.module.ts	#routing module for load gallery component
                   ├──gallery.component.html   	# \
@@ -73,6 +73,7 @@ $ ng serve --open
             └──index.ts           #contains all state and reducers
 
         └──shared
+            ├──constants     #constants for the project
             ├──interfaces    #interfaces for the project
             ├──services
                     ├──drawing          #services drawing
@@ -84,7 +85,11 @@ $ ng serve --open
                                  └── ...other classes   #other drawing classes are extensible
                            ├──interfaces           #interfaces for drawing
                            └──drawing.service.ts   #the main drawing service that starts drawing
-                    └──firebase      #services for working with firestore/firebase-Auth
+                    └──firebase           #services for working with firestore/firebase-Auth
+                           ├──interfaces       #interfaces for firestore or firebase requests
+                           ├──firebase-auth.service.ts
+                           ├──firestore.service.ts
+                           └──firebase-error.service.ts    #service for processing API errors
 
             └──components
                     ├──toast-notice    #component to dynamically insert it in the form of toast notifications
@@ -98,11 +103,17 @@ $ ng serve --open
 # FIRESTORE STRUCTURE
 
 ```
-    └──Images                       #main collection for users
-          └──ImagesId               #user id
-                  ├──ImageSrc  		  #link to image
-                  ├──Author 		    #user email
-                  └──date		        #date added
+    ├──Pictures                          #main collection for pictures
+          └──PictureId                   #firestore picture id
+                  ├──PictureSrc  		 #link to image
+                  ├──userId 		      #user id
+                  └──dateAdded		 #date added
+
+    ├──Users                        #main collection for users
+          └──UserId                 #firestore user id
+               ├──uid 		      #unique users id
+               └──name              #user name
+
 
 ```
 
