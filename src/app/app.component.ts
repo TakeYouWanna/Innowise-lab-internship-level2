@@ -10,6 +10,8 @@ import {
 } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { ToastNoticeComponent } from './shared/components/toast-notice/toast-notice.component';
+import { State } from './store';
+import { removeMessage } from './store/toast-notice/actions';
 import { selectToastNotice } from './store/toast-notice/selectors';
 import { initializeUser } from './store/user/actions';
 
@@ -26,7 +28,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   public toastContainer: ViewContainerRef;
 
   constructor(
-    private store$: Store,
+    private store$: Store<State>,
     private componentFactoryResolver: ComponentFactoryResolver,
     private changeDetectorRef: ChangeDetectorRef
   ) {}
