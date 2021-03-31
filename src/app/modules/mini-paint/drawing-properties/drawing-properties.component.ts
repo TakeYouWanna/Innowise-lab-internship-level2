@@ -45,7 +45,7 @@ export class DrawingPropertiesComponent implements OnInit {
 
     this.textPropertiesForm = this.formBuilder.group({
       font: ['Times New Roman'],
-      fontSize: [10, [Validators.min(1), Validators.max(50)]],
+      fontSize: [10],
       fontColor: ['#000000'],
       fontWeight: [false],
       fontCursive: [false],
