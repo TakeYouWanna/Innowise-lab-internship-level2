@@ -7,7 +7,7 @@ import {
 } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { Criterion } from '../../interfaces/criteria.interface';
+import { Criterion } from '../../interfaces/criterion.interface';
 import { PictureList } from '../../interfaces/picture-list.interface';
 import { PictureData } from './interfaces/picture-data.interface';
 import { UserData } from './interfaces/user-data.interface';

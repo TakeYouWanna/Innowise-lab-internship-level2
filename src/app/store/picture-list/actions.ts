@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { ApiError } from 'src/app/shared/interfaces/api-error.interface';
-import { Criterion } from 'src/app/shared/interfaces/criteria.interface';
+import { Criterion } from 'src/app/shared/interfaces/criterion.interface';
 import { PictureList } from 'src/app/shared/interfaces/picture-list.interface';
 import { PictureListActionsType } from './constant';
 
