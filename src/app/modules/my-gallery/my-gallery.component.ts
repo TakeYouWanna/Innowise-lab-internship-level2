@@ -8,7 +8,7 @@ import {
 import { Actions, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { Criterion } from 'src/app/shared/interfaces/criteria.interface';
+import { Criterion } from 'src/app/shared/interfaces/criterion.interface';
 import { PictureList } from 'src/app/shared/interfaces/picture-list.interface';
 import { State } from 'src/app/store';
 import {
@@ -27,13 +27,19 @@ import { selectUserUid } from 'src/app/store/user/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MyGalleryComponent implements OnInit, OnDestroy {
-  public pictureList: Observable<PictureList> = this.store$.pipe(
+  public pictureList$: Observable<PictureList> = this.store$.pipe(
     select(selectPictureList)
   );
 
-  public uid$ = this.store$.pipe(select(selectUserUid));
+  private uid$ = this.store$.pipe(select(selectUserUid));
 
-  public uidSubscription$: Subscription;
+  private uidSubscription$: Subscription;
+
+  private pictureListSubscription$: Subscription;
+
+  private picturesUploaded: boolean;
+
+  private currentPosition: number;
 
   public criterion: Criterion = {
     limit: 10,
@@ -41,37 +47,49 @@ export class MyGalleryComponent implements OnInit, OnDestroy {
     value: '',
   };
 
-  @HostListener('window:scroll')
+  @HostListener('window:scroll', [])
   public onWindowScroll(): void {
     if (
       document.scrollingElement.scrollHeight -
-        document.scrollingElement.scrollTop ===
-      document.scrollingElement.clientHeight
+        document.scrollingElement.scrollTop -
+        document.scrollingElement.clientHeight <
+        50 &&
+      this.picturesUploaded &&
+      this.currentPosition < document.scrollingElement.scrollTop
     ) {
+      this.picturesUploaded = false;
       this.criterion.limit += 10;
       this.loadPictures();
     }
+    this.currentPosition = document.scrollingElement.scrollTop;
   }
 
   constructor(private store$: Store<State>, private actions$: Actions) {}
 
   public ngOnInit(): void {
+    this.store$.dispatch(clearAllPicture());
+
     this.uidSubscription$ = this.uid$.subscribe((uid) => {
       if (uid) {
         this.criterion.value = uid;
         this.loadPictures();
       }
     });
+
     const action = this.actions$
       .pipe(ofType(PictureListActionsType.removePictureSuccess))
       .subscribe(() => {
         this.loadPictures();
         action.unsubscribe();
       });
+
+    this.pictureListSubscription$ = this.pictureList$.subscribe(() => {
+      this.picturesUploaded = true;
+    });
   }
 
   public loadPictures(): void {
-    const { criterion } = this;
+    const criterion = { ...this.criterion };
     if (criterion.value) {
       this.store$.dispatch(loadPictures({ criterion }));
     }
@@ -86,7 +104,7 @@ export class MyGalleryComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
+    this.pictureListSubscription$.unsubscribe();
     this.uidSubscription$.unsubscribe();
-    this.store$.dispatch(clearAllPicture());
   }
 }

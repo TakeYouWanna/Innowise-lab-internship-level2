@@ -6,7 +6,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Criterion } from 'src/app/shared/interfaces/criteria.interface';
+import { Subscription } from 'rxjs';
+import { Criterion } from 'src/app/shared/interfaces/criterion.interface';
 import { State } from 'src/app/store';
 import {
   clearAllPicture,
@@ -25,40 +26,60 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
   public author: string;
 
-  public limit = 10;
+  private picturesUploaded: boolean;
 
-  @HostListener('window:scroll')
-  private onWindowScroll(): void {
+  private pictureListSubscription$: Subscription;
+
+  private currentPosition: number;
+
+  private criterion: Criterion = {
+    limit: 10,
+    type: '',
+    value: '',
+  };
+
+  @HostListener('window:scroll', [])
+  public onWindowScroll(): void {
     if (
       document.scrollingElement.scrollHeight -
-        document.scrollingElement.scrollTop ===
-      document.scrollingElement.clientHeight
+        document.scrollingElement.scrollTop -
+        document.scrollingElement.clientHeight <
+        50 &&
+      this.picturesUploaded &&
+      this.currentPosition < document.scrollingElement.scrollTop
     ) {
-      this.limit += 10;
-
+      this.picturesUploaded = false;
+      this.criterion.limit += 10;
       this.loadPictures();
     }
+    this.currentPosition = document.scrollingElement.scrollTop;
   }
 
   constructor(private store$: Store<State>) {}
 
   public ngOnInit(): void {
+    this.store$.dispatch(clearAllPicture());
+
+    this.pictureListSubscription$ = this.pictureList$.subscribe(() => {
+      this.picturesUploaded = true;
+    });
     this.loadPictures();
   }
 
   public loadPictures(): void {
-    let type = '';
-    let value = '';
-    if (this.author) {
-      type = 'author';
-      value = this.author;
-    }
-    const criterion: Criterion = {
-      limit: this.limit,
-      type,
-      value,
-    };
+    const criterion = { ...this.criterion };
     this.store$.dispatch(loadPictures({ criterion }));
+  }
+
+  public loadPicturesByAuthor(): void {
+    if (this.author) {
+      this.criterion.type = 'author';
+      this.criterion.value = this.author;
+    } else {
+      this.criterion.type = '';
+      this.criterion.value = '';
+    }
+    this.loadPictures();
   }
 
   public trackByObject(index: number, item: object): number {
@@ -66,6 +87,6 @@ export class GalleryComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.store$.dispatch(clearAllPicture());
+    this.pictureListSubscription$.unsubscribe();
   }
 }

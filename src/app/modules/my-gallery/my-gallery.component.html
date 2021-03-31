@@ -1,6 +1,9 @@
 <div
   class="window-div picture"
-  *ngFor="let picture of pictureList | async | keyvalue; trackBy: trackByObject"
+  *ngFor="
+    let picture of pictureList$ | async | keyvalue;
+    trackBy: trackByObject
+  "
 >
   <div>
     <p>
