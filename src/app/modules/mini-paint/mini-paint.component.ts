@@ -10,7 +10,6 @@ import { Observable } from 'rxjs';
 import { FigureProperties } from 'src/app/shared/interfaces/figure-properties.interface';
 import { TextProperties } from 'src/app/shared/interfaces/text-properties.interface';
 import { DrawingService } from 'src/app/shared/services/drawing/drawing.service';
-import { FirestoreService } from 'src/app/shared/services/firebase/firestore.service';
 import { State } from 'src/app/store';
 import { addPicture } from 'src/app/store/picture-list/actions';
 import { selectUserUid } from 'src/app/store/user/selectors';
@@ -38,8 +37,7 @@ export class MiniPaintComponent implements AfterViewInit {
 
   constructor(
     private drawingService: DrawingService,
-    private store$: Store<State>,
-    private firestore: FirestoreService
+    private store$: Store<State>
   ) {}
 
   public ngAfterViewInit(): void {
